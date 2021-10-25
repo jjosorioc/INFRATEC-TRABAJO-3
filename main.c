@@ -11,36 +11,11 @@ Author: Juan José Osorio 202021720 j.osorioc@uniandes.edu.cp
 Recorre el vector, elemento por elemento, imprimiéndolos en hexa. Uno por línea 
 descompuesto en sus bytes de más a menos significativo
 */
-void procedimientoEmpaquetamiento(int (**apuntador), int tamanho) // Es ** porque es un apuntador a un apuntador
+void procedimientoEmpaquetamiento(int *(apuntador), int tamanho)
 {
     for (int i = 0; i < tamanho; i++)
         {
-            char numString[8];
-            sprintf(numString, "%08X", (*apuntador)[i]);
-            
-            // Código más feo que he hecho.
-            char specificFormat[] = {
-                '0',
-                'x',
-                numString[0],
-                numString[1],
-                ' ',
-                '0',
-                'x',
-                numString[2],
-                numString[3],
-                ' ',
-                '0',
-                'x',
-                numString[4],
-                numString[5],
-                ' ',
-                '0',
-                'x',
-                numString[6],
-                numString[7],
-            };
-            printf("\nv[%d] = %s", i, specificFormat);
+            printf("\nv[%d] = %d", i, apuntador[i]); //TODO: Ponerlo en el formato deseado
         }
 }
 
@@ -84,7 +59,7 @@ int main(void)
         }
 
         // Se invoca el procedimiento que imprime el vector
-        procedimientoEmpaquetamiento(&elVector, tamanho);
+        procedimientoEmpaquetamiento(elVector, tamanho);
     }
     return 0;
 }
