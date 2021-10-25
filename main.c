@@ -15,7 +15,32 @@ void procedimientoEmpaquetamiento(int (**apuntador), int tamanho) // Es ** porqu
 {
     for (int i = 0; i < tamanho; i++)
         {
-            printf("\nIndex %d: %d", i, (*apuntador)[i]);
+            char numString[8];
+            sprintf(numString, "%08X", (*apuntador)[i]);
+            
+            // Código más feo que he hecho.
+            char specificFormat[] = {
+                '0',
+                'x',
+                numString[0],
+                numString[1],
+                ' ',
+                '0',
+                'x',
+                numString[2],
+                numString[3],
+                ' ',
+                '0',
+                'x',
+                numString[4],
+                numString[5],
+                ' ',
+                '0',
+                'x',
+                numString[6],
+                numString[7],
+            };
+            printf("\nv[%d] = %s", i, specificFormat);
         }
 }
 
