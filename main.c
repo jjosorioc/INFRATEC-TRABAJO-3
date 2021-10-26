@@ -11,11 +11,88 @@ Author: Juan José Osorio 202021720 j.osorioc@uniandes.edu.cp
 Recorre el vector, elemento por elemento, imprimiéndolos en hexa. Uno por línea 
 descompuesto en sus bytes de más a menos significativo
 */
-void procedimientoEmpaquetamiento(int *(apuntador), int tamanho)
+void procedimientoEmpaquetamiento(int *apuntador, int tamanho)
 {
     for (int i = 0; i < tamanho; i++)
         {
-            printf("\nv[%d] = %d", i, apuntador[i]); //TODO: Ponerlo en el formato deseado
+            unsigned char bytes[4];
+            bytes[0] = (apuntador[i] >> 24) & 0xFF; // Primer byte
+            bytes[1] = (apuntador[i] >> 16) & 0xFF; // Segundo byte
+            bytes[2] = (apuntador[i] >> 8) & 0xFF; // Tercer byte
+            bytes[3] = apuntador[i] & 0xFF; // Cuarto byte
+
+            // Los valores se cambian a hexadecimal, como el número más grande posible es FF
+            // El primer valor es ==  (num//16)%16
+            // El segundo valor es == (num%16)
+            int separados[] = {
+                (bytes[0]/16)%16,
+                bytes[0]%16,
+                (bytes[1]/16)%16,
+                bytes[1]%16,
+                (bytes[2]/16)%16,
+                bytes[2]%16,
+                (bytes[3]/16)%16,
+                bytes[3]%16,
+            };
+
+            // Vector con los valores de 'separados' como chars
+            // Si es mayor a 9 se cambia su valor a base hexa
+            char specificFormat[8];
+            
+            for (int x=0; x < 8; x++)
+            {
+                int valorComoNum = separados[x];
+                if (valorComoNum == 10)
+                {
+                    specificFormat[x] = 'A';
+                } else if (valorComoNum == 11)
+                {
+                    specificFormat[x] = 'B';
+                }else if (valorComoNum == 12)
+                {
+                    specificFormat[x] = 'C';
+                }else if (valorComoNum == 13)
+                {
+                    specificFormat[x] = 'D';
+                }else if (valorComoNum == 14)
+                {
+                    specificFormat[x] = 'E';
+                }else if (valorComoNum == 15)
+                {
+                    specificFormat[x] = 'F';
+                }else {
+                    specificFormat[x] = valorComoNum + '0';
+                }
+
+            }
+
+            /**
+             * Se pone en el formato final con los '0x' y el espacio entre cada valor
+            */
+            char finalFormat[] = {
+                '0',
+                'x',
+                specificFormat[0],
+                specificFormat[1],
+                ' ',
+                '0',
+                'x',
+                specificFormat[2],
+                specificFormat[3],
+                ' ',
+                '0',
+                'x',
+                specificFormat[4],
+                specificFormat[5],
+                ' ',
+                '0',
+                'x',
+                specificFormat[6],
+                specificFormat[7]
+            };
+
+            // Se imprimen los valores
+            printf("\nv[%d] = %s", i, finalFormat); 
         }
 }
 
