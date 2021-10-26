@@ -39,29 +39,29 @@ void procedimientoEmpaquetamiento(int *apuntador, int tamanho)
             // Si es mayor a 9 se cambia su valor a base hexa
             char specificFormat[8];
             
-            for (int x=0; x < 8; x++)
+            for (int indice=0; indice < 8; indice++)
             {
-                int valorComoNum = separados[x];
+                int valorComoNum = separados[indice];
                 if (valorComoNum == 10)
                 {
-                    specificFormat[x] = 'A';
+                    specificFormat[indice] = 'A';
                 } else if (valorComoNum == 11)
                 {
-                    specificFormat[x] = 'B';
+                    specificFormat[indice] = 'B';
                 }else if (valorComoNum == 12)
                 {
-                    specificFormat[x] = 'C';
+                    specificFormat[indice] = 'C';
                 }else if (valorComoNum == 13)
                 {
-                    specificFormat[x] = 'D';
+                    specificFormat[indice] = 'D';
                 }else if (valorComoNum == 14)
                 {
-                    specificFormat[x] = 'E';
+                    specificFormat[indice] = 'E';
                 }else if (valorComoNum == 15)
                 {
-                    specificFormat[x] = 'F';
+                    specificFormat[indice] = 'F';
                 }else {
-                    specificFormat[x] = valorComoNum + '0';
+                    specificFormat[indice] = valorComoNum + '0';
                 }
 
             }
